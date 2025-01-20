@@ -40,6 +40,7 @@ public:
             cout << "Author: " << current->author << endl;
             cout << "Edition: " << current->edition << endl;
             cout << "Year: " << current->year << endl;
+            cout << "####################################################" << endl;
             current = current->next;
         }
         cout << "-------------------------------------------------------------------\n";
@@ -292,6 +293,7 @@ public:
                     cout << "Book \"" << title << "\" borrowed by \"" << userName
                          << "\". Due Date: " << ctime(&dueDate);
                     current->status = true;
+                    return;
                 }else{
                     cout << "Book \"" << title << "\" is currently borrowed. Adding \"" << userName << "\" to the queue.\n";
                     time_t now = time(0);
@@ -341,6 +343,7 @@ public:
                 cout << "Author: " << current->author << endl;
                 cout << "Edition: " << current->edition << endl;
                 cout << "Year: " << current->year << endl;
+                cout << "####################################################" << endl;
                 booksFound = true;
             }
             current = current->next;

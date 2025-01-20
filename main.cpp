@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 #include "Books_DS.h"
+#include <thread>
+#include <chrono>
 using namespace std;
 
 
@@ -26,6 +28,9 @@ int main() {
         cout << "14. Exit the system\n";
         cout << "Enter your choice: ";
         cin >> choice;
+        system("cls");
+
+        int t = library.findLength();
 
         switch (choice) {
             case 1: {
@@ -47,6 +52,7 @@ int main() {
             case 2:
                 cout << "Displaying all books in the library:\n";
                 library.displayBooks();
+                this_thread::sleep_for(chrono::seconds(t));
                 break;
             case 3: {
                 string title;
@@ -79,6 +85,7 @@ int main() {
                 cout << "Enter the title of the book you want to borrow: ";
                 getline(cin, title);
                 library.borrowBook(title, userName);
+                this_thread::sleep_for(chrono::seconds(2));
                 break;
             }
             case 7: {
@@ -87,11 +94,13 @@ int main() {
                 cout << "Enter the title of the book to return: ";
                 getline(cin, title);
                 library.returnBook(title);
+                this_thread::sleep_for(chrono::seconds(2));
                 break;
             }
             case 8:
                 cout << "Displaying all borrowed books:\n";
                 library.displayBorrowedBooks();
+                this_thread::sleep_for(chrono::seconds(t));
                 break;
             case 9: {
                 string title;
@@ -127,6 +136,8 @@ int main() {
             default:
                 cout << "Invalid choice! Please select a valid option from the menu.\n";
         }
+        this_thread::sleep_for(chrono::seconds(3));
+        system("cls");
     } while (!stop);
 
     return 0;
