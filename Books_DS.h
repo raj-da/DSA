@@ -26,6 +26,32 @@ private:
 public:
     MyList() : head(nullptr), tail(nullptr) {}
 
+    // for writing into the file
+    void writeToFile(string title, string author, int edition, int year){
+        fstream myFile;
+        myFile.open("bookDB.txt", ios::out);
+        if(myFile.is_open()){
+            myFile << title << '\n';
+            myFile << author << '\n';
+            myFile << edition << '\n';
+            myFile << year << '\n';
+        }
+        myFile.close();
+    }
+
+    // // for updating the file
+    // void updateFile(string title, string author, int edition, int year){
+    //     fstream myFile;
+    //     myFile.open("bookDB.txt", ios::out);
+    //     if(myFile.is_open()){
+    //         myFile << title << '\n';
+    //         myFile << author << '\n';
+    //         myFile << edition << '\n';
+    //         myFile << year << '\n';
+    //     }
+    //     myFile.close();
+    // }
+
     // Forward traversal
     void displayBooks() {
         Node* current = head;
@@ -140,6 +166,8 @@ public:
             new_node->next = current;
             current->prev = new_node;
         }
+
+        writeToFile(title, author, edition, year);
     }
 
     void updateBook(string prevTitle, string title, string author, int edition, int year) {
