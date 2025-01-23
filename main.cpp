@@ -28,15 +28,16 @@ int main() {
         cout << "3. Search for a book by title\n";
         cout << "4. Search for books by author\n";
         cout << "5. Search for books by year of publication\n";
-        cout << "6. Borrow a book\n";
-        cout << "7. Return a borrowed book\n";
-        cout << "8. Display all borrowed books\n";
-        cout << "9. Delete a book by title\n";
-        cout << "10. Delete all books by a specific author\n";
-        cout << "11. Sort books by author name\n";
-        cout << "12. Sort books by year of publication\n";
-        cout << "13. Display the total number of books in the library\n";
-        cout << "14. Exit the system\n";
+        cout << "6. Update a book\n";
+        cout << "7. Borrow a book\n";
+        cout << "8. Return a borrowed book\n";
+        cout << "9. Display all borrowed books\n";
+        cout << "10. Delete a book by title\n";
+        cout << "11. Delete all books by a specific author\n";
+        cout << "12. Sort books by author name\n";
+        cout << "13. Sort books by year of publication\n";
+        cout << "14. Display the total number of books in the library\n";
+        cout << "15. Exit the system\n";
         cout << "Enter your choice: ";
         cin >> choice;
         system("cls");
@@ -89,6 +90,25 @@ int main() {
                 break;
             }
             case 6: {
+                string prevTitle, title, author;
+                int edition, year;
+                cin.ignore();
+                cout << "Enter the title of the book to be updated: ";
+                getline(cin, prevTitle);
+                cout << "Enter the updated title of the book: ";
+                getline(cin, title);
+                cout << "Enter the updated author of the book: ";
+                getline(cin, author);
+                cout << "Enter the updated edition of the book: ";
+                cin >> edition;
+                cout << "Enter the updated year of publication: ";
+                cin >> year;
+                
+                library.updateBook(prevTitle, title, author, edition, year);
+                cout << "Book updated successfully!\n";
+                break;
+            }
+            case 7: {
                 string title, userName;
                 cin.ignore();
                 cout << "Enter your name: ";
@@ -99,7 +119,7 @@ int main() {
                 this_thread::sleep_for(chrono::seconds(2));
                 break;
             }
-            case 7: {
+            case 8: {
                 string title;
                 cin.ignore();
                 cout << "Enter the title of the book to return: ";
@@ -108,12 +128,12 @@ int main() {
                 this_thread::sleep_for(chrono::seconds(2));
                 break;
             }
-            case 8:
+            case 9:
                 cout << "Displaying all borrowed books:\n";
                 library.displayBorrowedBooks();
                 this_thread::sleep_for(chrono::seconds(t));
                 break;
-            case 9: {
+            case 10: {
                 string title;
                 cin.ignore();
                 cout << "Enter the title of the book to delete: ";
@@ -121,7 +141,7 @@ int main() {
                 library.deleteByTitle(title);
                 break;
             }
-            case 10: {
+            case 11: {
                 string author;
                 cin.ignore();
                 cout << "Enter the author to delete all their books: ";
@@ -129,18 +149,18 @@ int main() {
                 library.deleteByAuthor(author);
                 break;
             }
-            case 11:
+            case 12:
                 cout << "Sorting books by author name...\n";
                 library.sortByAuthor();
                 break;
-            case 12:
+            case 13:
                 cout << "Sorting books by year of publication...\n";
                 library.sortByYear();
                 break;
-            case 13:
+            case 14:
                 cout << "The total number of books in the library: " << library.findLength() << "\n";
                 break;
-            case 14:
+            case 15:
                 stop = true;
                 cout << "Exiting the system. Thank you!\n";
                 break;

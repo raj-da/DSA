@@ -32,19 +32,34 @@ class UserQueue {
         }
 
         // Remove a user from the queue
-        void dequeue() {
+        bool dequeue(string title) {
             if(!head){
                 cout << "The queue is empty." << endl;
-                return;
+                return false;
             }
 
-            UserNode *temp = head;
-            head = head->next;
-            if(!head)
-                tail = nullptr;
+            UserNode *current = head;
+            UserNode *previous = nullptr;
 
-            cout << "User \"" << temp->name << "\" removed from the queue for book \"" << temp->bookTitle << "\".\n";
-            delete temp;
+            if(current->bookTitle == title){
+                head = head->next;
+                cout << "User \"" << current->name << "\" removed from the queue for book \"" << current->bookTitle << "\".\n";
+                delete current;
+                return true;
+            }else{
+                while(current){
+                    if(current->bookTitle == title){
+                        previous->next = current->next;
+                        cout << "User \"" << current->name << "\" removed from the queue for book \"" << current->bookTitle << "\".\n";
+                        delete current;
+                        return true;
+                    }
+                    previous = current;
+                    current = current->next;
+                }
+                return false;
+            }
+
         }
 
         // get next user in the queue
@@ -67,4 +82,5 @@ class UserQueue {
                 current = current->next;
             }
         }
+
 };

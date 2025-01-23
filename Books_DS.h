@@ -142,6 +142,25 @@ public:
         }
     }
 
+    void updateBook(string prevTitle, string title, string author, int edition, int year) {
+        Node* current = head;
+        int position = 1;
+
+        while (current) {
+            if (current->title == prevTitle) {
+                current->title = title;
+                current->author = author;
+                current->edition = edition;
+                current->year = year;
+                return;
+            }
+            current = current->next;
+            position++;
+        }
+
+        cout << "Book '" << title << "' not found in the library." << endl;
+    }
+
     // Delete by position
     void deleteAtPos(int pos) {
         if (!head) {
@@ -247,6 +266,19 @@ public:
         }
     }
 
+    // for swapping
+    void changeVal(string &value1, string &value2) {
+        string temp = value1;
+        value1 = value2;
+        value2 = temp;
+    }
+
+    void changeVal(int &value1, int &value2) {
+        int temp = value1;
+        value1 = value2;
+        value2 = temp;
+    }
+
     // Sort books by author
     void sortByAuthor() {
         if (!head || !head->next) return;
@@ -254,10 +286,10 @@ public:
         for (Node* i = head; i->next; i = i->next) {
             for (Node* j = i->next; j; j = j->next) {
                 if (i->author > j->author) {
-                    swap(i->title, j->title);
-                    swap(i->author, j->author);
-                    swap(i->edition, j->edition);
-                    swap(i->year, j->year);
+                    changeVal(i->title, j->title);
+                    changeVal(i->author, j->author);
+                    changeVal(i->edition, j->edition);
+                    changeVal(i->year, j->year);
                 }
             }
         }
@@ -272,10 +304,10 @@ public:
         for (Node* i = head; i->next; i = i->next) {
             for (Node* j = i->next; j; j = j->next) {
                 if (i->year > j->year) {
-                    swap(i->title, j->title);
-                    swap(i->author, j->author);
-                    swap(i->edition, j->edition);
-                    swap(i->year, j->year);
+                    changeVal(i->title, j->title);
+                    changeVal(i->author, j->author);
+                    changeVal(i->edition, j->edition);
+                    changeVal(i->year, j->year);
                 }
             }
         }
@@ -313,9 +345,10 @@ public:
             if(current->title == title){
                 if(current->status){
                     current->status = false;
-                    if (queue.peek() && queue.peek()->bookTitle == title) {
+                    if (queue.dequeue(title)) {
                         cout << "Notifying the next user in the queue.\n";
-                        queue.dequeue();
+                    }else{
+                        cout << "Book " << title << "returned.\n"; 
                     }
                     return;
                 }else{
