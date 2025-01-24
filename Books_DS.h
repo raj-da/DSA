@@ -35,6 +35,8 @@ public:
             myFile << author << '\n';
             myFile << edition << '\n';
             myFile << year << '\n';
+        }else{
+            cout << "File didn't open";
         }
         myFile.close();
     }
@@ -141,6 +143,8 @@ public:
     void insertBook(string title, string author, int edition, int year) {
         Node* new_node = new Node(title, author, edition, year);
 
+        writeToFile(title, author, edition, year);
+        
         if (!head) {
             head = tail = new_node;
             return;
@@ -167,7 +171,6 @@ public:
             current->prev = new_node;
         }
 
-        writeToFile(title, author, edition, year);
     }
 
     void updateBook(string prevTitle, string title, string author, int edition, int year) {
